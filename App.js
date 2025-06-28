@@ -17,7 +17,7 @@ export default function App() {
         <VentasProvider>
             <NavigationContainer>
                 <Stack.Navigator>
-                    <Stack.Screen name="Inicio" component={HomeScreen} />
+                    <Stack.Screen name="Inicio" component={HomeScreen} options={{headerShown: false}} />
                     <Stack.Screen name="RegistrarVenta" component={RegistroVentaScreen} />
                     <Stack.Screen name="Ventas" component={VentasScreen} />
                     <Stack.Screen name="AgregarProducto" component={AgregarProductoScreen} />
