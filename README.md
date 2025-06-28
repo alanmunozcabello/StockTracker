@@ -1,50 +1,67 @@
-# Welcome to your Expo app 👋
+# StockTracker
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+App móvil para llevar el registro de productos, ventas y stock, desarrollada en React Native.
 
-## Get started
+## Características
 
-1. Install dependencies
+- Registro y visualización de productos con stock y precio.
+- Registro de ventas con selección de productos y cantidades.
+- Descuento automático de stock al vender.
+- Historial de ventas persistente (se guarda aunque cierres la app).
+- Edición y eliminación de productos (mantén presionado un producto).
+- Eliminación de ventas (mantén presionada una venta).
+- Menú para añadir productos y futuras configuraciones.
+- Persistencia de datos usando AsyncStorage.
 
-   ```bash
+## Instalación
+
+1. **Clona el repositorio:**
+   ```sh
+   git clone https://github.com/tuusuario/StockTracker.git
+   cd StockTracker
+   ```
+
+2. **Instala dependencias:**
+   ```sh
    npm install
    ```
 
-2. Start the app
-
-   ```bash
-   npx expo start
+3. **Instala dependencias nativas (si usas Expo, ya está listo):**
+   ```sh
+   npx expo install @react-native-async-storage/async-storage
    ```
 
-In the output, you'll find options to open the app in a
+4. **Inicia la app:**
+   ```sh
+   npx expo start
+   ```
+   Escanea el QR con Expo Go en tu celular.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Uso
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- **Añadir producto:** Menú ⋮ arriba a la derecha → "Añadir producto".
+- **Editar/eliminar producto:** Mantén presionado un producto en la lista.
+- **Registrar venta:** Botón "Registrar Venta".
+- **Ver historial de ventas:** Botón "Historial de Ventas".
+- **Eliminar venta:** Mantén presionada una venta en el historial.
 
-## Get a fresh project
+## Estructura principal
 
-When you're ready, run:
+- `/screens`: Pantallas principales (Home, RegistroVenta, Ventas, Agregar/Editar Producto)
+- `/context`: Contextos para productos y ventas (manejo de estado global y persistencia)
+- `/data`: Datos iniciales de productos y ventas
+- `/utils`: Funciones de cálculo
 
-```bash
-npm run reset-project
-```
+## Requisitos
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+- Node.js
+- Expo CLI (`npm install -g expo-cli`)
+- Expo Go en tu celular (opcional, para pruebas rápidas)
 
-## Learn more
+## Licencia
 
-To learn more about developing your project with Expo, look at the following resources:
+MIT
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+---
 
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+> ¡Hecho con ❤️ para llevar el control de tus ventas y productos!
