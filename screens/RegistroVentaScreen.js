@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, Button, TextInput, FlatList, TouchableOpacity, Alert } from 'react-native';
 import React, { useState, useContext, useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { calcularTotalEstimado } from '../utils/calculos';
 import { StockContext } from '../context/StockContext';
 import { VentasContext } from '../context/VentasContext';
@@ -40,7 +41,7 @@ export default function RegistroVentaScreen({ navigation }) {
     });
   };
 
-  const registrarVenta = () => {
+  const registrarVenta = async () => {
     if (listaDeItems.length === 0) {
       Alert.alert('Error', 'Debes seleccionar al menos un producto.');
       return;
@@ -57,8 +58,32 @@ export default function RegistroVentaScreen({ navigation }) {
     };
     agregarVenta(venta);
     descontarStock(listaDeItems);
+    // Espera un ciclo para que el contexto se actualice
+    setTimeout(() => revisarBajoStock(productos), 300);
     Alert.alert('Venta registrada', 'La venta se registró correctamente.');
     navigation.goBack();
+  };
+
+  const revisarBajoStock = async (productos) => {
+    const notif = await AsyncStorage.getItem('NOTIFICACIONES');
+    if (notif === 'true') {
+      const bajos = productos.filter(p => p.stock <= 5);
+      if (bajos.length > 0) {
+        // Alerta en pantalla
+        Alert.alert(
+          '¡Atención!',
+          `Stock bajo en:\n${bajos.map(p => `${p.nombre} (${p.stock})`).join('\n')}`
+        );
+        // Notificación local
+        await Notifications.scheduleNotificationAsync({
+          content: {
+            title: '¡Stock bajo!',
+            body: 'Algunos de tus productos tienen poco stock.',
+          },
+          trigger: null, // Inmediata
+        });
+      }
+    }
   };
 
   return (
