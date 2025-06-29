@@ -15,10 +15,16 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { useContext } from 'react';
 import { StockContext } from '../context/StockContext';
+import { ThemeContext } from '../context/ThemeContext';
 
 export default function HomeScreen() {
   const navigation = useNavigation();
   const { productos, eliminarProducto } = useContext(StockContext);
+
+  const { dark } = React.useContext(ThemeContext);
+
+  const backgroundColor = dark ? '#222' : '#fff';
+  const textColor = dark ? '#fff' : '#222';
 
   const [menuVisible, setMenuVisible] = useState(false);
   const [productoSeleccionado, setProductoSeleccionado] = useState(null);
@@ -50,11 +56,11 @@ export default function HomeScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.safe}>
-      <View style={styles.container}>
+    <SafeAreaView style={[styles.safe, { backgroundColor }]}>
+      <View style={[styles.container, { backgroundColor }]}>
         {/* Encabezado con botón de menú */}
         <View style={styles.headerRow}>
-          <Text style={styles.titulo}>📦 Lista de Productos</Text>
+          <Text style={[styles.titulo, { color: textColor }]}>📦 Lista de Productos</Text>
           <TouchableOpacity onPress={() => setMenuVisible(true)} style={styles.menuButton}>
             <Text style={styles.menuIcon}>⋮</Text>
           </TouchableOpacity>
@@ -75,7 +81,7 @@ export default function HomeScreen() {
                     <Text style={styles.menuText}>Añadir producto</Text>
                   </TouchableOpacity>
                   <View style={styles.menuDivider} />
-                  <TouchableOpacity style={styles.menuItem} onPress={() => { setMenuVisible(false); }}>
+                  <TouchableOpacity style={styles.menuItem} onPress={() => { setMenuVisible(false); navigation.navigate('Configuracion'); }}>
                     <Text style={styles.menuText}>Configuraciones</Text>
                   </TouchableOpacity>
                 </View>
@@ -125,10 +131,13 @@ export default function HomeScreen() {
               delayLongPress={300}
               activeOpacity={0.7}
             >
-              <View style={styles.item}>
-                <Text style={styles.nombre}>{item.nombre}</Text>
-                <Text>Stock: {item.stock}</Text>
-                <Text>Compra: ${item.precioCompraUnitario}</Text>
+              <View style={[
+                styles.item,
+                { backgroundColor: dark ? '#333' : '#f1f1f1' }
+              ]}>
+                <Text style={[styles.nombre, { color: textColor }]}>{item.nombre}</Text>
+                <Text style={{ color: textColor }}>Stock: {item.stock}</Text>
+                <Text style={{ color: textColor }}>Compra: ${item.precioCompraUnitario}</Text>
               </View>
             </TouchableOpacity>
           )}

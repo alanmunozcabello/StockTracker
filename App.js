@@ -8,23 +8,28 @@ import { StockProvider } from './context/StockContext';
 import AgregarProductoScreen from './screens/AgregarProductoScreen';
 import EditarProductoScreen from './screens/EditarProductoScreen';
 import { VentasProvider } from './context/VentasContext';
+import ConfiguracionesScreen from './screens/ConfiguracionesScreen';
+import { ThemeProvider } from './context/ThemeContext';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <StockProvider>
+    <ThemeProvider>
+      <StockProvider>
         <VentasProvider>
-            <NavigationContainer>
-                <Stack.Navigator>
-                    <Stack.Screen name="Inicio" component={HomeScreen} options={{headerShown: false}} />
-                    <Stack.Screen name="RegistrarVenta" component={RegistroVentaScreen} />
-                    <Stack.Screen name="Ventas" component={VentasScreen} />
-                    <Stack.Screen name="AgregarProducto" component={AgregarProductoScreen} />
-                    <Stack.Screen name="EditarProducto" component={EditarProductoScreen} />
-                </Stack.Navigator>
-            </NavigationContainer>
+          <NavigationContainer>
+            <Stack.Navigator>
+              <Stack.Screen name="Inicio" component={HomeScreen} options={{headerShown: false}} />
+              <Stack.Screen name="RegistrarVenta" component={RegistroVentaScreen} />
+              <Stack.Screen name="Ventas" component={VentasScreen} />
+              <Stack.Screen name="AgregarProducto" component={AgregarProductoScreen} />
+              <Stack.Screen name="EditarProducto" component={EditarProductoScreen} />
+              <Stack.Screen name="Configuracion" component={ConfiguracionesScreen}/>
+            </Stack.Navigator>
+          </NavigationContainer>
         </VentasProvider>
-    </StockProvider>
+      </StockProvider>
+    </ThemeProvider>
   );
 }
