@@ -1,10 +1,10 @@
-import { View, Text, StyleSheet, Button, TextInput, FlatList, TouchableOpacity, Alert } from 'react-native';
-import React, { useState, useContext, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { calcularTotalEstimado } from '../utils/calculos';
+import { useContext, useEffect, useState } from 'react';
+import { Alert, Button, FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { StockContext } from '../context/StockContext';
-import { VentasContext } from '../context/VentasContext';
 import { ThemeContext } from '../context/ThemeContext';
+import { VentasContext } from '../context/VentasContext';
+import { calcularTotalEstimado } from '../utils/calculos';
 
 export default function RegistroVentaScreen({ navigation }) {
   const { productos, descontarStock } = useContext(StockContext);
@@ -51,7 +51,12 @@ export default function RegistroVentaScreen({ navigation }) {
       return;
     }
     const venta = {
-      productos: listaDeItems.map(({ id, nombre, cantidad }) => ({ id, nombre, cantidad })),
+      productos: listaDeItems.map(({ id, nombre, cantidad, precioCompraUnitario }) => ({ 
+        id, 
+        nombre, 
+        cantidad, 
+        precioCompraUnitario 
+      })),
       totalProductos,
       valorTotal: Number(valorIngresado),
       fecha: new Date().toISOString()

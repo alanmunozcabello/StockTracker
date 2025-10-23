@@ -9,6 +9,7 @@ import AgregarProductoScreen from './screens/AgregarProductoScreen';
 import EditarProductoScreen from './screens/EditarProductoScreen';
 import { VentasProvider } from './context/VentasContext';
 import ConfiguracionesScreen from './screens/ConfiguracionesScreen';
+import ComputoScreen from './screens/ComputoScreen'
 import { ThemeProvider } from './context/ThemeContext';
 import * as Notifications from 'expo-notifications';
 
@@ -30,6 +31,7 @@ export default function App() {
           <NavigationContainer>
             <Stack.Navigator>
               <Stack.Screen name="Inicio" component={HomeScreen} options={{headerShown: false}} />
+              <Stack.Screen name="Computo" component={ComputoScreen} />
               <Stack.Screen name="RegistrarVenta" component={RegistroVentaScreen} />
               <Stack.Screen name="Ventas" component={VentasScreen} />
               <Stack.Screen name="AgregarProducto" component={AgregarProductoScreen} />

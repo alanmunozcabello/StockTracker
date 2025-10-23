@@ -145,6 +145,13 @@ export default function HomeScreen() {
 
         <View style={styles.botonContenedor}>
           <Button
+            title="Computo"
+            onPress={() => navigation.navigate('Computo')}
+          />
+        </View>
+
+        <View style={styles.botonContenedor}>
+          <Button
             title="Historial de Ventas"
             onPress={() => navigation.navigate('Ventas')}
           />
